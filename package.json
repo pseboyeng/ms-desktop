@@ -14,7 +14,8 @@
   "author": "peter seboyeng",
   "license": "ISC",
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.1.0",

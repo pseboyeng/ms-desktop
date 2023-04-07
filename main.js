@@ -1,8 +1,13 @@
 
 const { app, BrowserWindow, ipcMain, Menu } = require('electron');
-const path = require('path');
 
+//----- USERS ---------
+const { insertUser, findUsers, updateUser, deleteUser } = require('./db/user');
 
+//----- CHRISTIANLIFE ------
+const { newChristianLife } = require('./db/christianlife');
+
+// ----------- IMPORT WINDOWS -------------------------
 const SplashWindow = require('./src/app/splashwindow');
 const LoginWindow = require('./src/app/loginwindow');
 const DashWindow = require('./src/app/dashwindow');
@@ -24,7 +29,6 @@ const setVersion =() => {
     splashWin.webContents.send('set-version', version);
 }
 
-
 //user dashboard.
 const createDash =() => {
     dashwin = new DashWindow('./src/views/dashboard.html');
@@ -45,16 +49,54 @@ const createLoginWindow =() => {
     Menu.setApplicationMenu(mainMenu);
 }
 
-// ---------------------------------------------------------------------------
+const user ={
+    name:'peter',
+    surname:'seboyeng',
+    mobile:'0638676077',
+    password:'JavaAssociate@2022',
+    capacity:'ms'
+}
+
+const user2 ={
+    name:'joe',
+    surname:'baloyi',
+    mobile:'0638676077',
+    password:'JavaAssociate@2022',
+    capacity:'el'
+}
+
+const user3 ={
+    name:'fiyo',
+    surname:'phahladira',
+    mobile:'0638676077',
+    password:'JavaAssociate@2022',
+    capacity:'el'
+}
+
+const schedule1 = {
+    date:'08-04-2023',
+    chairman:'peter seboyeng',
+    time:'19:00',
+    opening_song:89,
+    treassures:'fiyo phahladira'
+}
+
+// ---------------------------------  APP INITIALIZATION ------------------------------------------
 
 app.whenReady().then(async ()=> {
-
-    //OPEN A REALM.
-    
 
     // splashWin = new SplashWindow('./src/views/splash.html');
     createSplashWindow();
     setVersion();
+
+    insertUser(user);
+    insertUser(user2);
+    insertUser(user3);
+    findUsers();
+    updateUser(2,'hlengani');
+    deleteUser(3);
+
+    newChristianLife(schedule1);
 
     setTimeout(() => {
         createLoginWindow();
